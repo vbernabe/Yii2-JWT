@@ -106,7 +106,7 @@ class AuthController extends Controller
      */
     public function actionRefreshToken() {
         $refresh_token = Yii::$app->request->cookies->getValue('refresh-token', false);
-        if (!$refresh_token) {
+	if (!$refresh_token) {
             Yii::error("Missing cookie refresh token " , Yii::$app->params['log_api']);
             return new \yii\web\UnauthorizedHttpException('No refresh token found.');
         }
@@ -133,22 +133,23 @@ class AuthController extends Controller
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return [
-                'status' => 'ok',
+                'status' => HttpStatus::OK,
                 'token' => (string) $token,
             ];
 
         } elseif (Yii::$app->request->getMethod() == 'DELETE') {
-            // Logging out
+            // Use this on logging out or invalidate refresh token
             if ($user_refresh_token && !$user_refresh_token->delete()) {
                 return new \yii\web\ServerErrorHttpException('Failed to delete the refresh token.');
             }
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ['status' => HttpStatus::OK];
-        } else {
+	} else {
+	    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return [
                 'status' => HttpStatus::UNAUTHORIZED,
-                'message' => 'Username and Password not found. Check Again!',
+                'message' => 'Refresh Token Error!',
                 'data' => ''
             ];
         }
