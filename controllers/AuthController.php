@@ -80,7 +80,7 @@ class AuthController extends Controller
             Yii::info("New access token generated " . $params['username'], Yii::$app->params['log_api']);
             $token = $user->generateJwt();
             return [
-                'status' => HttpStatus::FOUND,
+                'status' => HttpStatus::OK,
                 'message' => 'Login Succeed, save your token',
                 'data' => [
                     'id' => $user->id,
@@ -144,9 +144,13 @@ class AuthController extends Controller
             }
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['status' => 'ok'];
+            return ['status' => HttpStatus::OK];
         } else {
-            return new \yii\web\UnauthorizedHttpException('The user is inactive.');
+            return [
+                'status' => HttpStatus::UNAUTHORIZED,
+                'message' => 'Username and Password not found. Check Again!',
+                'data' => ''
+            ];
         }
     }
 }
