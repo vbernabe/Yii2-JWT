@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\Doctor;
+use app\utilities\HttpStatus;
 use Yii;
 use app\models\Patient;
 use yii\rest\ActiveController;
+use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 
-class PatientController extends ActiveController
+class PatientController extends Controller
 {
     public $modelClass = Patient::class;
 
@@ -19,6 +22,36 @@ class PatientController extends ActiveController
         $behaviors['authenticator']['class'] = \sizeg\jwt\JwtHttpBearerAuth::class;
         return $behaviors;
 
+    }
+
+//    public function actions()
+//    {
+//        $actions = parent::actions();
+//        unset($actions['index']);
+//        return $actions;
+//    }
+
+    /**
+     * Get all patient for this user based on access token
+     * @return array
+     */
+    public function actionIndex(){
+        $this->checkAccess('index');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        // get doctor patient map
+        $doctor = Doctor::findOne(['user_id' => Yii::$app->user->identity->id]);
+        $doctor_patient_map = $doctor->getDoctorPatientMaps()->all();
+        $patients = array();
+        foreach($doctor_patient_map as $doctor_patient){
+            // get patient details
+            $patient = $doctor_patient->getPatient()->one();
+            if(!empty($patient))
+                $patients[] = $patient;
+        }
+        return [
+            'status' => HttpStatus::OK,
+            'data' => $patients
+        ];
     }
 
     /**

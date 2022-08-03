@@ -232,6 +232,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
+     * Retrieve user rale
+     *
      * @return array
      */
     public function getRole(){
