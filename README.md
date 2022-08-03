@@ -82,20 +82,29 @@ This code has been deployed on EC2 AWS for testing
 https://34.211.45.94/
 ~~~
 
+[//]: # ()
+[//]: # ()
+[//]: # (TESTING)
 
-TESTING
--------
+[//]: # (-------)
 
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
+[//]: # ()
+[//]: # (Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework]&#40;http://codeception.com/&#41;.)
 
-Tests can be executed by running
+[//]: # ()
+[//]: # (Tests can be executed by running)
 
-```
-vendor/bin/codecept run
-```
+[//]: # ()
+[//]: # (```)
 
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. 
+[//]: # (vendor/bin/codecept run)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (The command above will execute unit and functional tests. Unit tests are testing the system components, while functional)
+
+[//]: # (tests are for testing user interaction. )
 
 
 API ENDPOINTS
