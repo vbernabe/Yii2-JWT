@@ -1,10 +1,8 @@
 <p align="center">
-    <h1 align="center">CODE TEST with <BR>Yii 2 Basic Project Template</h1>
+    <h1 align="center">Yii 2 Basic Project Template API implementation with JWT</h1>
     <br>
 </p>
 
-TTI Code based on Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
 
 The project is a REST API with JWT Authentication. Authorization used is based on access token
 with 5 minutes expiration time.
