@@ -42,7 +42,7 @@ on an AWS (see below after install)
 Clone from this repo and import the MySQL dump file. 
 
 ~~~
-$ git clone https://github.com/vbernabe/tti_wave.git tti_wave
+$ git clone https://github.com/vbernabe/yii2-jwt.git yii2-jwt
 ~~~
 
 Update the db config `config/db.php` with real data, for example:
@@ -50,7 +50,7 @@ Update the db config `config/db.php` with real data, for example:
 ```php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=tti_wave',
+    'dsn' => 'mysql:host=localhost;dbname=yii2-jwt',
     'username' => 'user',
     'password' => 'pwd',
     'charset' => 'utf8',
@@ -60,7 +60,7 @@ return [
 install dependencies via composer and run the yii server.
 
 ~~~
-$ cd tti_wave
+$ cd yii2-jwt
 $ composer install
 $ yii serve
 ~~~
